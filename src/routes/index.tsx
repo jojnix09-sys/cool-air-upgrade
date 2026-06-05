@@ -235,6 +235,7 @@ function Index() {
         title="Klimatizace výhodně"
         subtitle="Top modely za zvýhodněné ceny včetně montáže."
         products={deals}
+        onOpen={setOpenProduct}
       />
 
       {/* Novelty */}
@@ -244,6 +245,7 @@ function Index() {
           title="Novinky"
           subtitle="Nejnovější modely a doplňkové služby."
           products={novelties}
+          onOpen={setOpenProduct}
         />
       </section>
 
@@ -356,6 +358,9 @@ function Index() {
           ))}
         </div>
       </section>
+
+      {/* Product modal */}
+      {openProduct && <ProductModal product={openProduct} onClose={() => setOpenProduct(null)} />}
 
       {/* Footer */}
       <footer className="bg-primary-deep text-primary-foreground">
