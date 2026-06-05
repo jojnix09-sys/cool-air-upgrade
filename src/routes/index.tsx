@@ -78,11 +78,22 @@ function formatPrice(p: number) {
 
 function Index() {
   const [scrolled, setScrolled] = useState(false);
+  const [openProduct, setOpenProduct] = useState<Product | null>(null);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    if (!openProduct) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpenProduct(null); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [openProduct]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -112,13 +123,7 @@ function Index() {
         <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-4">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-[image:var(--gradient-hero)] text-primary-foreground text-xl shadow-[var(--shadow-glow)]">
-              ❄
-            </div>
-            <div className="leading-tight">
-              <div className="text-xl font-bold tracking-tight text-primary-deep">AirCool</div>
-              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">s.r.o.</div>
-            </div>
+            <img src={LOGO_URL} alt="AirCool — prodej a montáž klimatizací" className="h-11 w-auto" />
           </a>
 
           {/* Nav */}
