@@ -30,36 +30,40 @@ const categories = [
 
 const brands = ["Vivax", "Samsung", "Beko", "TCL", "Mitsubishi", "LG", "Daikin", "Toshiba", "Panasonic"];
 
+const LOGO_URL = "https://cdn.myshoptet.com/usr/www.shop-klimatizace.cz/user/logos/aircool.png";
+const CDN = "https://cdn.myshoptet.com/usr/www.shop-klimatizace.cz/user/shop/big/";
+
 type Product = {
   brand: string;
   name: string;
   power: string;
   price: number;
-  icon: string;
+  image: string;
   badges: ("akce" | "montaz" | "darek" | "novinka")[];
+  description?: string;
 };
 
 const deals: Product[] = [
-  { brand: "Vivax", name: "R+ White 1+1", power: "3,5 kW", price: 26432, icon: "❄️", badges: ["akce", "montaz"] },
-  { brand: "Beko", name: "Evolutio Pro 1+1", power: "3,5 kW", price: 26880, icon: "🌀", badges: ["montaz"] },
-  { brand: "TCL", name: "Elite F1", power: "2,6 kW", price: 23296, icon: "💨", badges: ["akce", "montaz"] },
-  { brand: "Samsung", name: "AR35 1+1", power: "3,5 kW", price: 26768, icon: "🌬️", badges: ["montaz", "darek"] },
-  { brand: "Mitsubishi", name: "HI ZS 1+1", power: "3,5 kW", price: 36848, icon: "❄️", badges: ["montaz"] },
-  { brand: "TCL", name: "FreshIN C7 1+1", power: "3,6 kW", price: 30352, icon: "🌿", badges: ["akce", "montaz"] },
-  { brand: "Toshiba", name: "Daiseikai 10 Wood 1+1", power: "2,5 kW", price: 59012, icon: "🌲", badges: ["montaz", "darek"] },
-  { brand: "Aux", name: "Freedom 1+1", power: "3,5 kW", price: 22500, icon: "💨", badges: ["akce", "montaz"] },
-  { brand: "Samsung", name: "AR35 1+1 bez montáže", power: "3,5 kW", price: 19844, icon: "🌬️", badges: ["akce"] },
+  { brand: "Vivax", name: "R+ White 1+1", power: "3,5 kW", price: 26432, image: CDN + "6735-3_vivax-r-white.jpg", badges: ["akce", "montaz"], description: "Spolehlivá nástěnná klimatizace Vivax R+ White s chladicím i topným výkonem 3,5 kW. Ideální pro místnosti do 40 m²." },
+  { brand: "Beko", name: "Evolutio Pro 1+1", power: "3,5 kW", price: 26880, image: CDN + "10675_beko-beepgh-090-091.jpg", badges: ["montaz"], description: "Tichá a úsporná Beko Evolutio Pro s WiFi modulem a inverterovým kompresorem." },
+  { brand: "TCL", name: "Elite F1", power: "2,6 kW", price: 23296, image: CDN + "11068-3_tcl-akce-cisticka-zdarma-elite-f1.jpg", badges: ["akce", "montaz"], description: "TCL Elite F1 v akci s čističkou vzduchu zdarma. Energetická třída A+++." },
+  { brand: "Samsung", name: "AR35 1+1", power: "3,5 kW", price: 26768, image: CDN + "3216_nastenna-klimatizace-samsung.png", badges: ["montaz", "darek"], description: "Osvědčená Samsung AR35 s technologií Digital Inverter a 10letou zárukou na kompresor." },
+  { brand: "Mitsubishi", name: "HI ZS 1+1", power: "3,5 kW", price: 36848, image: CDN + "11479_heavy-industries-zs-bila-1-1.jpg", badges: ["montaz"], description: "Prémiová Mitsubishi Heavy Industries ZS — tichý chod a špičková účinnost." },
+  { brand: "TCL", name: "FreshIN C7 1+1", power: "3,6 kW", price: 30352, image: CDN + "11029_tcl-akce-cisticka-zdarma-freshin-c7.jpg", badges: ["akce", "montaz"], description: "TCL FreshIN C7 s přívodem čerstvého vzduchu zvenčí. Akce: čistička vzduchu zdarma." },
+  { brand: "Toshiba", name: "Daiseikai 10 Wood 1+1", power: "2,5 kW", price: 59012, image: CDN + "11113_daiseikai-10-wood-new-hlavni-foto.jpg", badges: ["montaz", "darek"], description: "Designová Toshiba Daiseikai 10 Wood — dřevěný dekor, plazmový filtr a vysoký SCOP." },
+  { brand: "Aux", name: "Freedom 1+1", power: "3,5 kW", price: 22500, image: CDN + "6216_klimatizace-freedom.jpg", badges: ["akce", "montaz"], description: "Cenově dostupná Aux Freedom s inverterem a Wi-Fi ovládáním." },
+  { brand: "Samsung", name: "AR35 1+1 bez montáže", power: "3,5 kW", price: 19844, image: CDN + "4404_nastenna-klimatizace-samsung.png", badges: ["akce"], description: "Samsung AR35 v akční ceně — pouze dodávka jednotky, bez instalace." },
 ];
 
 const novelties: Product[] = [
-  { brand: "TCL", name: "GentleCool P6", power: "novinka", price: 28900, icon: "✨", badges: ["novinka"] },
-  { brand: "Beko", name: "Evolutio Pro", power: "novinka", price: 26880, icon: "🌀", badges: ["novinka"] },
-  { brand: "LG", name: "Artcool Mirror", power: "Design", price: 42500, icon: "🪞", badges: ["novinka"] },
-  { brand: "Toshiba", name: "Haori", power: "Premium", price: 54900, icon: "🎌", badges: ["novinka"] },
-  { brand: "LG", name: "Standard", power: "2,5 kW", price: 21900, icon: "❄️", badges: [] },
-  { brand: "Služba", name: "Montáž 1+1", power: "instalace", price: 8400, icon: "🛠️", badges: [] },
-  { brand: "Služba", name: "Montáž 1+2", power: "instalace", price: 12320, icon: "🔧", badges: [] },
-  { brand: "Služba", name: "Servis klimatizace", power: "údržba", price: 2420, icon: "⚙️", badges: [] },
+  { brand: "TCL", name: "GentleCool P6", power: "novinka", price: 28900, image: CDN + "11011-9_tcl-akce-cisticka-zdarma-gentle-cool-p6.jpg", badges: ["novinka"], description: "Nová řada TCL GentleCool P6 s pokročilou filtrací a tichým provozem." },
+  { brand: "Beko", name: "Evolutio Pro", power: "novinka", price: 26880, image: CDN + "10675_beko-beepgh-090-091.jpg", badges: ["novinka"], description: "Beko Evolutio Pro — nový model s vylepšeným SEER a WiFi." },
+  { brand: "LG", name: "Artcool Mirror", power: "Design", price: 42500, image: CDN + "336-6_nejlevnejsi-klimatizace-lg.jpg", badges: ["novinka"], description: "LG Artcool Mirror — designová zrcadlová jednotka, ionizátor Plasmaster." },
+  { brand: "Toshiba", name: "Haori", power: "Premium", price: 54900, image: CDN + "7749-3_nejlevnejsi-klimatizace-toshiba.jpg", badges: ["novinka"], description: "Toshiba Haori — textilní krytí a prémiový design pro moderní interiéry." },
+  { brand: "LG", name: "Standard", power: "2,5 kW", price: 21900, image: CDN + "912_klimatizace-lg-do-bytu.jpg", badges: [], description: "LG Standard 2,5 kW pro menší místnosti, výborný poměr cena/výkon." },
+  { brand: "Služba", name: "Montáž 1+1", power: "instalace", price: 8400, image: CDN + "1128_montaz1-1.jpg", badges: [], description: "Profesionální montáž jednotky 1+1 do 5 m potrubí, včetně materiálu." },
+  { brand: "Služba", name: "Montáž 1+2", power: "instalace", price: 12320, image: CDN + "1131_montaz1-1.jpg", badges: [], description: "Montáž multisplit systému 1+2 — dvě vnitřní jednotky, kompletní instalace." },
+  { brand: "Služba", name: "Servis klimatizace", power: "údržba", price: 2420, image: CDN + "3648_servis-klimatizace.jpg", badges: [], description: "Pravidelný servis a čištění klimatizace pro maximální výkon a hygienu." },
 ];
 
 const reviews = [
@@ -74,11 +78,22 @@ function formatPrice(p: number) {
 
 function Index() {
   const [scrolled, setScrolled] = useState(false);
+  const [openProduct, setOpenProduct] = useState<Product | null>(null);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    if (!openProduct) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpenProduct(null); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [openProduct]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -108,13 +123,7 @@ function Index() {
         <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-4">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-[image:var(--gradient-hero)] text-primary-foreground text-xl shadow-[var(--shadow-glow)]">
-              ❄
-            </div>
-            <div className="leading-tight">
-              <div className="text-xl font-bold tracking-tight text-primary-deep">AirCool</div>
-              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">s.r.o.</div>
-            </div>
+            <img src={LOGO_URL} alt="AirCool — prodej a montáž klimatizací" className="h-11 w-auto" />
           </a>
 
           {/* Nav */}
@@ -226,6 +235,7 @@ function Index() {
         title="Klimatizace výhodně"
         subtitle="Top modely za zvýhodněné ceny včetně montáže."
         products={deals}
+        onOpen={setOpenProduct}
       />
 
       {/* Novelty */}
@@ -235,6 +245,7 @@ function Index() {
           title="Novinky"
           subtitle="Nejnovější modely a doplňkové služby."
           products={novelties}
+          onOpen={setOpenProduct}
         />
       </section>
 
@@ -348,6 +359,9 @@ function Index() {
         </div>
       </section>
 
+      {/* Product modal */}
+      {openProduct && <ProductModal product={openProduct} onClose={() => setOpenProduct(null)} />}
+
       {/* Footer */}
       <footer className="bg-primary-deep text-primary-foreground">
         <div className="mx-auto max-w-7xl px-4 py-16">
@@ -419,19 +433,25 @@ function BadgeChip({ kind }: { kind: Product["badges"][number] }) {
   );
 }
 
-function ProductCard({ p }: { p: Product }) {
+function ProductCard({ p, onOpen }: { p: Product; onOpen: (p: Product) => void }) {
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[var(--shadow-hover)]">
+    <div
+      onClick={() => onOpen(p)}
+      className="group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[var(--shadow-hover)]"
+    >
       {p.badges.length > 0 && (
         <div className="absolute top-4 left-4 z-10 flex flex-col items-start gap-1.5">
           {p.badges.map((b) => <BadgeChip key={b} kind={b} />)}
         </div>
       )}
-      <div className="relative h-56 overflow-hidden bg-[image:var(--gradient-soft)]">
-        <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ backgroundImage: "radial-gradient(circle at center, oklch(0.62 0.2 245 / 0.15), transparent 70%)" }} />
-        <div className="absolute inset-0 grid place-items-center text-7xl transition-transform duration-500 group-hover:scale-110">
-          {p.icon}
-        </div>
+      <div className="relative h-56 overflow-hidden bg-white">
+        <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ backgroundImage: "radial-gradient(circle at center, oklch(0.62 0.2 245 / 0.12), transparent 70%)" }} />
+        <img
+          src={p.image}
+          alt={`${p.brand} ${p.name}`}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+        />
       </div>
       <div className="flex flex-1 flex-col p-5">
         <div className="text-xs font-semibold uppercase tracking-widest text-primary">{p.brand}</div>
@@ -442,10 +462,16 @@ function ProductCard({ p }: { p: Product }) {
             <div className="text-2xl font-bold text-primary-deep">{formatPrice(p.price)}</div>
           </div>
           <div className="mt-3 flex gap-2">
-            <button className="flex-1 rounded-full bg-[image:var(--gradient-accent)] px-4 py-2.5 text-sm font-semibold text-accent-foreground shadow-[var(--shadow-soft)] transition-transform hover:scale-[1.02]">
+            <button
+              onClick={(e) => { e.stopPropagation(); }}
+              className="flex-1 rounded-full bg-[image:var(--gradient-accent)] px-4 py-2.5 text-sm font-semibold text-accent-foreground shadow-[var(--shadow-soft)] transition-transform hover:scale-[1.02]"
+            >
               Do košíku
             </button>
-            <button className="rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary">
+            <button
+              onClick={(e) => { e.stopPropagation(); onOpen(p); }}
+              className="rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
+            >
               Detail
             </button>
           </div>
@@ -460,11 +486,13 @@ function ProductSection({
   title,
   subtitle,
   products,
+  onOpen,
 }: {
   eyebrow: string;
   title: string;
   subtitle: string;
   products: Product[];
+  onOpen: (p: Product) => void;
 }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-20">
@@ -477,7 +505,74 @@ function ProductSection({
         <a href="#" className="text-sm font-semibold text-primary hover:underline">Zobrazit vše →</a>
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {products.map((p, i) => <ProductCard key={i} p={p} />)}
+        {products.map((p, i) => <ProductCard key={i} p={p} onOpen={onOpen} />)}
+      </div>
+    </div>
+  );
+}
+
+function ProductModal({ product, onClose }: { product: Product; onClose: () => void }) {
+  return (
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-primary-deep/70 p-4 backdrop-blur-md animate-in fade-in duration-200"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-background shadow-2xl max-h-[92vh] overflow-y-auto"
+      >
+        <button
+          onClick={onClose}
+          aria-label="Zavřít"
+          className="absolute top-4 right-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-background/80 text-foreground backdrop-blur hover:bg-primary hover:text-primary-foreground transition-colors"
+        >
+          ✕
+        </button>
+        <div className="grid md:grid-cols-2">
+          <div className="relative bg-white p-8 md:p-12 min-h-[320px]">
+            <div className="absolute top-6 left-6 flex flex-col gap-1.5">
+              {product.badges.map((b) => <BadgeChip key={b} kind={b} />)}
+            </div>
+            <img
+              src={product.image}
+              alt={`${product.brand} ${product.name}`}
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <div className="flex flex-col p-8 md:p-10">
+            <div className="text-xs font-bold uppercase tracking-widest text-primary">{product.brand}</div>
+            <h2 className="mt-2 text-3xl font-bold leading-tight">{product.name}</h2>
+            <div className="mt-2 text-sm text-muted-foreground">{product.power}</div>
+
+            <p className="mt-6 text-foreground/80 leading-relaxed">
+              {product.description ?? "Kvalitní produkt z nabídky AirCool. Pro detailní specifikaci nás kontaktujte."}
+            </p>
+
+            <ul className="mt-6 space-y-2 text-sm">
+              {["Doprava zdarma po celé ČR", "Záruka 2 roky + 10 let na kompresor", "Odborná konzultace zdarma"].map((f) => (
+                <li key={f} className="flex items-center gap-2 text-foreground/80">
+                  <span className="grid h-5 w-5 place-items-center rounded-full bg-success/15 text-success text-xs">✓</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-auto pt-8">
+              <div className="flex items-baseline gap-3">
+                <div className="text-4xl font-bold text-primary-deep">{formatPrice(product.price)}</div>
+                <span className="text-xs text-muted-foreground">vč. DPH</span>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <button className="flex-1 min-w-[140px] rounded-full bg-[image:var(--gradient-accent)] px-6 py-3.5 font-semibold text-accent-foreground shadow-[var(--shadow-hover)] transition-transform hover:scale-[1.02]">
+                  🛒 Do košíku
+                </button>
+                <button className="rounded-full border border-border px-6 py-3.5 font-semibold transition-colors hover:border-primary hover:text-primary">
+                  Poradit s výběrem
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
