@@ -30,36 +30,40 @@ const categories = [
 
 const brands = ["Vivax", "Samsung", "Beko", "TCL", "Mitsubishi", "LG", "Daikin", "Toshiba", "Panasonic"];
 
+const LOGO_URL = "https://cdn.myshoptet.com/usr/www.shop-klimatizace.cz/user/logos/aircool.png";
+const CDN = "https://cdn.myshoptet.com/usr/www.shop-klimatizace.cz/user/shop/big/";
+
 type Product = {
   brand: string;
   name: string;
   power: string;
   price: number;
-  icon: string;
+  image: string;
   badges: ("akce" | "montaz" | "darek" | "novinka")[];
+  description?: string;
 };
 
 const deals: Product[] = [
-  { brand: "Vivax", name: "R+ White 1+1", power: "3,5 kW", price: 26432, icon: "❄️", badges: ["akce", "montaz"] },
-  { brand: "Beko", name: "Evolutio Pro 1+1", power: "3,5 kW", price: 26880, icon: "🌀", badges: ["montaz"] },
-  { brand: "TCL", name: "Elite F1", power: "2,6 kW", price: 23296, icon: "💨", badges: ["akce", "montaz"] },
-  { brand: "Samsung", name: "AR35 1+1", power: "3,5 kW", price: 26768, icon: "🌬️", badges: ["montaz", "darek"] },
-  { brand: "Mitsubishi", name: "HI ZS 1+1", power: "3,5 kW", price: 36848, icon: "❄️", badges: ["montaz"] },
-  { brand: "TCL", name: "FreshIN C7 1+1", power: "3,6 kW", price: 30352, icon: "🌿", badges: ["akce", "montaz"] },
-  { brand: "Toshiba", name: "Daiseikai 10 Wood 1+1", power: "2,5 kW", price: 59012, icon: "🌲", badges: ["montaz", "darek"] },
-  { brand: "Aux", name: "Freedom 1+1", power: "3,5 kW", price: 22500, icon: "💨", badges: ["akce", "montaz"] },
-  { brand: "Samsung", name: "AR35 1+1 bez montáže", power: "3,5 kW", price: 19844, icon: "🌬️", badges: ["akce"] },
+  { brand: "Vivax", name: "R+ White 1+1", power: "3,5 kW", price: 26432, image: CDN + "6735-3_vivax-r-white.jpg", badges: ["akce", "montaz"], description: "Spolehlivá nástěnná klimatizace Vivax R+ White s chladicím i topným výkonem 3,5 kW. Ideální pro místnosti do 40 m²." },
+  { brand: "Beko", name: "Evolutio Pro 1+1", power: "3,5 kW", price: 26880, image: CDN + "10675_beko-beepgh-090-091.jpg", badges: ["montaz"], description: "Tichá a úsporná Beko Evolutio Pro s WiFi modulem a inverterovým kompresorem." },
+  { brand: "TCL", name: "Elite F1", power: "2,6 kW", price: 23296, image: CDN + "11068-3_tcl-akce-cisticka-zdarma-elite-f1.jpg", badges: ["akce", "montaz"], description: "TCL Elite F1 v akci s čističkou vzduchu zdarma. Energetická třída A+++." },
+  { brand: "Samsung", name: "AR35 1+1", power: "3,5 kW", price: 26768, image: CDN + "3216_nastenna-klimatizace-samsung.png", badges: ["montaz", "darek"], description: "Osvědčená Samsung AR35 s technologií Digital Inverter a 10letou zárukou na kompresor." },
+  { brand: "Mitsubishi", name: "HI ZS 1+1", power: "3,5 kW", price: 36848, image: CDN + "11479_heavy-industries-zs-bila-1-1.jpg", badges: ["montaz"], description: "Prémiová Mitsubishi Heavy Industries ZS — tichý chod a špičková účinnost." },
+  { brand: "TCL", name: "FreshIN C7 1+1", power: "3,6 kW", price: 30352, image: CDN + "11029_tcl-akce-cisticka-zdarma-freshin-c7.jpg", badges: ["akce", "montaz"], description: "TCL FreshIN C7 s přívodem čerstvého vzduchu zvenčí. Akce: čistička vzduchu zdarma." },
+  { brand: "Toshiba", name: "Daiseikai 10 Wood 1+1", power: "2,5 kW", price: 59012, image: CDN + "11113_daiseikai-10-wood-new-hlavni-foto.jpg", badges: ["montaz", "darek"], description: "Designová Toshiba Daiseikai 10 Wood — dřevěný dekor, plazmový filtr a vysoký SCOP." },
+  { brand: "Aux", name: "Freedom 1+1", power: "3,5 kW", price: 22500, image: CDN + "6216_klimatizace-freedom.jpg", badges: ["akce", "montaz"], description: "Cenově dostupná Aux Freedom s inverterem a Wi-Fi ovládáním." },
+  { brand: "Samsung", name: "AR35 1+1 bez montáže", power: "3,5 kW", price: 19844, image: CDN + "4404_nastenna-klimatizace-samsung.png", badges: ["akce"], description: "Samsung AR35 v akční ceně — pouze dodávka jednotky, bez instalace." },
 ];
 
 const novelties: Product[] = [
-  { brand: "TCL", name: "GentleCool P6", power: "novinka", price: 28900, icon: "✨", badges: ["novinka"] },
-  { brand: "Beko", name: "Evolutio Pro", power: "novinka", price: 26880, icon: "🌀", badges: ["novinka"] },
-  { brand: "LG", name: "Artcool Mirror", power: "Design", price: 42500, icon: "🪞", badges: ["novinka"] },
-  { brand: "Toshiba", name: "Haori", power: "Premium", price: 54900, icon: "🎌", badges: ["novinka"] },
-  { brand: "LG", name: "Standard", power: "2,5 kW", price: 21900, icon: "❄️", badges: [] },
-  { brand: "Služba", name: "Montáž 1+1", power: "instalace", price: 8400, icon: "🛠️", badges: [] },
-  { brand: "Služba", name: "Montáž 1+2", power: "instalace", price: 12320, icon: "🔧", badges: [] },
-  { brand: "Služba", name: "Servis klimatizace", power: "údržba", price: 2420, icon: "⚙️", badges: [] },
+  { brand: "TCL", name: "GentleCool P6", power: "novinka", price: 28900, image: CDN + "11011-9_tcl-akce-cisticka-zdarma-gentle-cool-p6.jpg", badges: ["novinka"], description: "Nová řada TCL GentleCool P6 s pokročilou filtrací a tichým provozem." },
+  { brand: "Beko", name: "Evolutio Pro", power: "novinka", price: 26880, image: CDN + "10675_beko-beepgh-090-091.jpg", badges: ["novinka"], description: "Beko Evolutio Pro — nový model s vylepšeným SEER a WiFi." },
+  { brand: "LG", name: "Artcool Mirror", power: "Design", price: 42500, image: CDN + "336-6_nejlevnejsi-klimatizace-lg.jpg", badges: ["novinka"], description: "LG Artcool Mirror — designová zrcadlová jednotka, ionizátor Plasmaster." },
+  { brand: "Toshiba", name: "Haori", power: "Premium", price: 54900, image: CDN + "7749-3_nejlevnejsi-klimatizace-toshiba.jpg", badges: ["novinka"], description: "Toshiba Haori — textilní krytí a prémiový design pro moderní interiéry." },
+  { brand: "LG", name: "Standard", power: "2,5 kW", price: 21900, image: CDN + "912_klimatizace-lg-do-bytu.jpg", badges: [], description: "LG Standard 2,5 kW pro menší místnosti, výborný poměr cena/výkon." },
+  { brand: "Služba", name: "Montáž 1+1", power: "instalace", price: 8400, image: CDN + "1128_montaz1-1.jpg", badges: [], description: "Profesionální montáž jednotky 1+1 do 5 m potrubí, včetně materiálu." },
+  { brand: "Služba", name: "Montáž 1+2", power: "instalace", price: 12320, image: CDN + "1131_montaz1-1.jpg", badges: [], description: "Montáž multisplit systému 1+2 — dvě vnitřní jednotky, kompletní instalace." },
+  { brand: "Služba", name: "Servis klimatizace", power: "údržba", price: 2420, image: CDN + "3648_servis-klimatizace.jpg", badges: [], description: "Pravidelný servis a čištění klimatizace pro maximální výkon a hygienu." },
 ];
 
 const reviews = [
